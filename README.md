@@ -281,6 +281,8 @@ service/my-projects-operator-controller-manager-metrics-service created
 deployment.apps/my-projects-operator-controller-manager created
 ```
 
+Примечание: если уже был собран и выложен образ `my-projects-operator` и он нас устраивает, то можно сразу после скачивания этого репозитория переходить к шагу деплоя в кластер `make deploy`.
+
 ## Создание тестового Project в кластере и проверка работы оператора
 
 - Создаем в кластере объект типа Project из подготовленного ранее файла `config/samples/ops_v1alpha1_project.yaml`
@@ -356,6 +358,18 @@ kubectl get projects.ops.kodmandvl.my.local
 kubectl delete projects.ops.kodmandvl.my.local/myproj
 kubectl get projects.ops.kodmandvl.my.local 
 kubectl get ns | grep -e ^NAME -e myproj
+```
+
+## Заглянуть в pod my-projects-operator-controller-manager-а:
+
+Например, запустить ansible или bash:
+
+```bash
+# Запуск ansible:
+kubectl exec -it -n my-projects-operator-system deploy/my-projects-operator-controller-manager -- ansible all -l 127.0.0.1, -c local -m ping
+kubectl exec -it -n my-projects-operator-system deploy/my-projects-operator-controller-manager -- ansible --version
+## Запуск bash:
+kubectl exec -it -n my-projects-operator-system deploy/my-projects-operator-controller-manager -- bash
 ```
 
 ## Очистка окружения
