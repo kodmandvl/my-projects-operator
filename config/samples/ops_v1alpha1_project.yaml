@@ -1,0 +1,25 @@
+apiVersion: ops.kodmandvl.my.local/v1alpha1
+kind: Project
+metadata:
+  name: myproj
+spec:
+  members:
+    - dimka
+    - myuser
+  environments:
+    - name: prod
+      resources:
+        requests:
+          cpu: 2
+          memory: 2Gi
+        limits:
+          cpu: 2
+          memory: 2Gi
+    - name: test
+      resources:
+        requests:
+          cpu: 2
+          memory: 2Gi
+        limits:
+          cpu: 2
+          memory: 2Gi
